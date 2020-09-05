@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="1d45e7c8-ec30-44bb-b0a2-2420e748cf1a" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectId" id="1ZwXr2aHN2HkxAqayHGmeP2Gg0I" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="1d45e7c8-ec30-44bb-b0a2-2420e748cf1a" name="Default Changelist" comment="" />
+      <created>1585751324405</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1585751324405</updated>
+      <workItem from="1585751326522" duration="23237000" />
+      <workItem from="1585839730218" duration="3019000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="386" y="184" width="667" height="486" key="find.popup" timestamp="1585812683012">
+      <screen x="0" y="23" width="1440" height="808" />
+    </state>
+    <state x="386" y="184" width="667" height="486" key="find.popup/0.23.1440.808@0.23.1440.808" timestamp="1585812683012" />
+    <state x="470" y="198" width="670" height="517" key="search.everywhere.popup" timestamp="1585818220055">
+      <screen x="0" y="23" width="1440" height="808" />
+    </state>
+    <state x="2066" y="252" width="670" height="676" key="search.everywhere.popup/0.23.1440.808/1440.23.1920.1057@1440.23.1920.1057" timestamp="1585756257372" />
+    <state x="470" y="198" width="670" height="517" key="search.everywhere.popup/0.23.1440.808@0.23.1440.808" timestamp="1585818220055" />
+  </component>
+</project>
