@@ -13,18 +13,8 @@
     ],
     "jsList": [
         "src/resource.js",
-        "src/StringUtil.js",
         "src/app.js",
-        "src/ball.js",
-        "src/ngang.js",
-        "src/define.js",
-        "src/resultLayer.js",
-        "src/gameLayer.js",
-        "src/homeLayer.js",
-        "src/popupHelp.js",
-        "src/popupLevel.js",
-        "src/questionLayer.js",
-        "src/highScoreLayer.js",
-        "src/shop.js"
+        "src/baseLayer.js",
+        "src/background.js"
     ]
 }
