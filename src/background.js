@@ -20,8 +20,17 @@ var Background = BaseLayer.extend({
         this._super();
         switch (type) {
             case ccui.Widget.TOUCH_ENDED:
-                console.log("touch move 1321");
+                const nameLayer = "MenuMap";
+                const layer = gameScene.children.find(e => e.name === nameLayer);
+                if (layer) {
+                    layer.setVisible(true);
+                    return;
+                }
+                const menuMap = new MenuMap();
+                menuMap.name = nameLayer;
+                gameScene.addChild(menuMap);
                 break;
         }
     },
+
 });

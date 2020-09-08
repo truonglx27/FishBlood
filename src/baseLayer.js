@@ -29,6 +29,9 @@ var BaseLayer = cc.Layer.extend({
             case "YELLOW":
                 label.setColor(cc.color.YELLOW);
                 break;
+            case "GREEN":
+                label.setColor(cc.color(0, 209, 181));
+                break;
             case "BLACK":
                 label.setColor(cc.color.BLACK);
                 break;
@@ -52,7 +55,7 @@ var BaseLayer = cc.Layer.extend({
         }
     },
 
-    loadAndSetButton: function (spriteName, swallow, posX, posY, scale) {
+    loadAndSetButton: function (spriteName, swallow, posX, posY, scale, isloadPlist = true) {
         var button = new ccui.Button();
         var tempName;
         if (swallow == undefined || swallow == null) {
@@ -60,8 +63,9 @@ var BaseLayer = cc.Layer.extend({
         } else {
             button.setSwallowTouches(swallow);
         }
-
-        button.loadTextures(spriteName, tempName, "", ccui.Widget.PLIST_TEXTURE);
+        isloadPlist ?
+            button.loadTextures(spriteName, tempName, "", ccui.Widget.PLIST_TEXTURE) :
+            button.loadTextureNormal(spriteName, ccui.Widget.LOCAL_TEXTURE);
 
         button.addTouchEventListener(this.buttonEvent);
         if (scale != undefined && scale != null) {

@@ -15,6 +15,7 @@
         "src/resource.js",
         "src/app.js",
         "src/baseLayer.js",
-        "src/background.js"
+        "src/background.js",
+        "src/menuMap.js"
     ]
 }
