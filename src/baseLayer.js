@@ -5,13 +5,17 @@ var BaseLayer = cc.Layer.extend({
     ctor: function () {
         this._super();
     },
-    loadAndSetSprite: function (spriteName, posX, posY, scale) {
+    loadAndSetSprite: function (spriteName, posX, posY, scale, isLoadPlist = true) {
 
         var sprite = new cc.Sprite();
-        sprite.initWithSpriteFrameName(spriteName);
+        isLoadPlist ?
+            sprite.initWithSpriteFrameName(spriteName) :
+            sprite.initWithFile(spriteName);
+
+
 
         if (scale != undefined && scale != null) {
-            sprite.setScale(scale.x, scale.y);
+            sprite.setScale(scale);
         }
         if (posX != null && posY != null) {
             sprite.setPosition(posX, posY);
@@ -31,6 +35,9 @@ var BaseLayer = cc.Layer.extend({
                 break;
             case "GREEN":
                 label.setColor(cc.color(0, 209, 181));
+                break;
+            case "GREENN":
+                label.setColor(cc.color(1,41,37));
                 break;
             case "BLACK":
                 label.setColor(cc.color.BLACK);
@@ -106,4 +113,25 @@ var BaseLayer = cc.Layer.extend({
                 break;
         }
     },
+    checkPositionMatch: function (obj, touchPos) {
+        var nodeSpaceLocation = obj.getParent().convertToNodeSpace(touchPos);
+        if (cc.rectContainsPoint(obj.getBoundingBox(), nodeSpaceLocation)) {
+            return true;
+        } else {
+            return false;
+        }
+    },
+
+    calcAngleDegrees: function (from, to) {
+        let angle = Math.round(Math.atan2(to.y - from.y, to.x - from.x) * 180 / Math.PI);
+        // if (angle < 0) angle += 360;
+        return angle;
+    },
+
+    calcD: function (from, to) {
+        dx = to.x - from.x;
+        dy = Math.abs(to.y - from.y);
+        var mid = cc.p(from.x + dx / 2, from.y + dy / 1.2);
+        return mid;
+    }
 });

@@ -9,13 +9,16 @@
     "engineDir": "frameworks/cocos2d-html5",
     "modules": [
         "cocos2d",
-        "extensions"
+        "extensions",
+        "external"
     ],
     "jsList": [
         "src/resource.js",
         "src/app.js",
         "src/baseLayer.js",
         "src/background.js",
-        "src/menuMap.js"
+        "src/menuMap.js",
+        "src/Maps/map1.js",
+        "src/menuItem.js"
     ]
 }

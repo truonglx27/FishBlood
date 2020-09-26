@@ -4,6 +4,7 @@ var Background = BaseLayer.extend({
         this.init();
     },
     init: function () {
+        BackGoundThis = this;
         cc.spriteFrameCache.addSpriteFrames(res.bg_plist);
 
         var bg = this.loadAndSetSprite("bg_logo.png", size.width / 2, size.height / 2);

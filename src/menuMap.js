@@ -4,6 +4,7 @@ var MenuMap = BaseLayer.extend({
         this.init();
     },
     init: function () {
+        MenuMapThis = this;
         cc.spriteFrameCache.addSpriteFrames(res.map4_plist);
         cc.spriteFrameCache.addSpriteFrames(res.itemMenu_plist);
 
@@ -13,30 +14,62 @@ var MenuMap = BaseLayer.extend({
         let lbSelectMap = this.loadAndSetLabel("SELECT MAP", "Arial", 40, "GREEN", null, bg.width / 2, bg.height * .9);
         bg.addChild(lbSelectMap);
 
-        let menuMap1 = this.loadAndSetButton(res.menuMap1, true, bg.width / 2 - 30, bg.height / 2 + 30, .16, false);
-        menuMap1.setAnchorPoint(1, 0);
-        menuMap1.name = "menuMap1";
-        bg.addChild(menuMap1);
+        this.bgNode = bg;
 
-        let menuMap2 = this.loadAndSetButton(res.menuMap2, true, bg.width / 2 + 30, bg.height / 2 + 30, .16, false);
-        menuMap2.setAnchorPoint(0, 0);
-        menuMap2.name = "menuMap2";
-        bg.addChild(menuMap2);
+        let listMenuMap = [
+            { name: res.menuMap1, pos: cc.p(bg.width / 2 - 30, bg.height / 2 + 30), anchor: cc.p(1, 0) },
+            { name: res.menuMap2, pos: cc.p(bg.width / 2 + 30, bg.height / 2 + 30), anchor: cc.p(0, 0) },
+            { name: res.menuMap3, pos: cc.p(bg.width / 2 - 30, bg.height / 2 - 30), anchor: cc.p(1, 1) },
+            { name: res.menuMap4, pos: cc.p(bg.width / 2 + 30, bg.height / 2 - 30), anchor: cc.p(0, 1) },
+        ]
 
-        let menuMap3 = this.loadAndSetButton(res.menuMap3, true, bg.width / 2 - 30, bg.height / 2 - 30, .16, false);
-        menuMap3.setAnchorPoint(1, 1);
-        menuMap3.name = "menuMap3";
-        bg.addChild(menuMap3);
+        listMenuMap.forEach((menuMap, i = 0) => {
+            let isLock = i == 0 ? false : true;
+            this.createMap(menuMap.name, menuMap.pos, menuMap.anchor, ++i, isLock);
+        });
 
-        let menuMap4 = this.loadAndSetButton(res.menuMap4, true, bg.width / 2 + 30, bg.height / 2 - 30, .16, false);
-        menuMap4.setAnchorPoint(0, 1);
-        menuMap4.name = "menuMap4";
-        bg.addChild(menuMap4);
-
-        let btnBack = this.loadAndSetButton("btn_back.png", true, bg.width * .05, bg.height * .9, .8, true);
+        let btnBack = this.loadAndSetButton("btn_back.png", true, bg.width * .06, bg.height * .9, .8, true);
         btnBack.name = "btnBack";
         bg.addChild(btnBack);
 
+
+        console.log("map :", bg.children[1].name);
+
+        cc.eventManager.addListener({
+            event: cc.EventListener.TOUCH_ONE_BY_ONE,
+            swallowTouches: true,
+            onTouchBegan: function (touch, event) {
+                MenuMapThis.onTouch(touch);
+            },
+        }, this);
+
+    },
+
+    onTouch: function (touch, event) {
+        const count = this.bgNode.childrenCount;
+        for (let i = 0; i < count; i++) {
+            if (this.checkPositionMatch(this.bgNode.children[i], touch.getLocation())) {
+                console.log("name layer: ", this.bgNode.children[i].name);
+                this.openMap(this.bgNode.children[i].name);
+            }
+        }
+    },
+
+    createMap: function (nameSpite, pos, anchor, i, isLock = true) {
+        let menuMap2 = this.loadAndSetSprite(nameSpite, pos.x, pos.y, .16, false);
+        menuMap2.setAnchorPoint(anchor.x, anchor.y);
+        menuMap2.name = "menuMap" + i;
+        this.bgNode.addChild(menuMap2);
+
+        let blurPanel = new cc.LayerColor(cc.color(0, 0, 0, 150));
+        blurPanel.setPosition(0, 0);
+        blurPanel.setAnchorPoint(0, 0);
+        blurPanel.setScale(2.1);
+        menuMap2.addChild(blurPanel);
+
+        let logMap2 = this.loadAndSetSprite("log_map.png", blurPanel.width / 2, blurPanel.height / 2, 2.6);
+        blurPanel.addChild(logMap2);
+        blurPanel.setVisible(isLock);
     },
 
     buttonEvent: function (sender, type) {
@@ -45,22 +78,24 @@ var MenuMap = BaseLayer.extend({
             case ccui.Widget.TOUCH_ENDED:
                 switch (sender.name) {
                     case "btnBack": {
-                        const nameLayer = "Background";
-                        const layer = gameScene.children.find(e => e.name === nameLayer);
                         gameScene.children.forEach(e => {
                             e.setVisible(false);
                         });
-                        if (layer) {
-                            layer.setVisible(true);
-                            return;
-                        }
-                        const background = new Background();
-                        background.name = nameLayer;
-                        gameScene.addChild(background);
+                        BackGoundThis.setVisible(true);
+                        break;
                     }
                 }
-                break;
         }
     },
 
+    openMap: function (namemap) {
+        switch (namemap) {
+            case "menuMap1": {
+                const map = new Map1();
+                map.name = "Map";
+                gameScene.addChild(map);
+                break;
+            }
+        }
+    }
 });
