@@ -4,6 +4,7 @@ var MenuItem = BaseLayer.extend({
         this.init(isFinish, level);
     },
     init: function (isFinish, level) {
+        MenuItemThis = this;
         this.level = level;
         // cc.spriteFrameCache.addSpriteFrames(res.map4_plist);
         cc.spriteFrameCache.addSpriteFrames(res.itemMenu_plist);
@@ -21,13 +22,13 @@ var MenuItem = BaseLayer.extend({
             let openMap = this.loadAndSetLabel("OPEN MAP", res.font, 50, "GREENN", null, bg.width * .4, bg.height * .55);
             bg.addChild(openMap);
 
-            let btnPlayMenu = this.loadAndSetButton("btn_playMenu.png", true, bg.width * .75, bg.height * .55, .9, true);
-            btnPlayMenu.name = "btnPlayMenu";
-            bg.addChild(btnPlayMenu);
+            let btnOpenNewMap = this.loadAndSetButton("btn_playMenu.png", true, bg.width * .75, bg.height * .55, .9, true);
+            btnOpenNewMap.name = "btnOpenNewMap";
+            bg.addChild(btnOpenNewMap);
         } else {
             lbSelectMap.string = "FAILED!"
-            let openMap = this.loadAndSetLabel("REPLAY", res.font, 50, "GREENN", null, bg.width * .4, bg.height * .55);
-            bg.addChild(openMap);
+            let rePlay = this.loadAndSetLabel("REPLAY", res.font, 50, "GREENN", null, bg.width * .4, bg.height * .55);
+            bg.addChild(rePlay);
 
             let btnReplay = this.loadAndSetButton("btn_playMenu.png", true, bg.width * .75, bg.height * .55, .9, true);
             btnReplay.name = "btnReplay";
@@ -49,35 +50,63 @@ var MenuItem = BaseLayer.extend({
             case ccui.Widget.TOUCH_ENDED:
                 switch (sender.name) {
                     case "btnMenuMap": {
-                        gameScene.children.forEach(e => {
-                            e.setVisible(false);
-                        });
-                        const nameLayer = "Map";
-                        const layer = gameScene.children.find(e => e.name === nameLayer);
-                        if (layer) {
-                            gameScene.removeChild(layer);
-                        }
+                        MenuItemThis.removeMap();
                         MenuMapThis.setVisible(true);
                         break;
                     }
+                    case "btnOpenNewMap":
                     case "btnReplay": {
-                        const map = new Map1();
-                        map.name = "Map";
-                        gameScene.addChild(map);
+                        MenuItemThis.removeMap();
+                        MenuItemThis.openMap(MenuItemThis.level);
                         break;
                     }
                 }
         }
     },
 
-    openMap: function (namemap) {
-        switch (namemap) {
-            case "menuMap1": {
+    openMap: function (number) {
+        switch (number) {
+            case 1: {
                 const map = new Map1();
-                map.name = "map1";
+                map.name = "Map";
+                gameScene.addChild(map);
+                break;
+            }
+            case 2: {
+                const map = new Map2();
+                map.name = "Map";
+                gameScene.addChild(map);
+                break;
+            }
+            case 3: {
+                const map = new Map3();
+                map.name = "Map";
+                gameScene.addChild(map);
+                break;
+            }
+            case 4: {
+                const map = new Map4();
+                map.name = "Map";
+                gameScene.addChild(map);
+                break;
+            }
+            default: {
+                const map = new Map1();
+                map.name = "Map";
                 gameScene.addChild(map);
                 break;
             }
         }
+    },
+    removeMap: function () {
+        gameScene.children.forEach(e => {
+            e.setVisible(false);
+        });
+        const nameLayer = "Map";
+        const layer = gameScene.children.find(e => e.name === nameLayer);
+        if (layer) {
+            gameScene.removeChild(layer);
+        }
     }
+
 });

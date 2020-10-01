@@ -9,9 +9,10 @@ var HelloWorldScene = cc.Scene.extend({
     onEnter: function () {
         this._super();
         gameScene = this;
+
         var bg = new Background();
         bg.name = "Background";
-        this.addChild(bg);
+        gameScene.addChild(bg);
 
         // let menuItem  = new MenuItem();
         // bg.addChild(menuItem);

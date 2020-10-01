@@ -18,7 +18,11 @@
         "src/baseLayer.js",
         "src/background.js",
         "src/menuMap.js",
+        "src/Maps/baseMap.js",
         "src/Maps/map1.js",
+        "src/Maps/map2.js",
+        "src/Maps/map3.js",
+        "src/Maps/map4.js",
         "src/menuItem.js"
     ]
 }

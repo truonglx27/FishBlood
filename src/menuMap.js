@@ -1,3 +1,5 @@
+var listMap = [];
+
 var MenuMap = BaseLayer.extend({
     ctor: function () {
         this._super();
@@ -32,9 +34,6 @@ var MenuMap = BaseLayer.extend({
         btnBack.name = "btnBack";
         bg.addChild(btnBack);
 
-
-        console.log("map :", bg.children[1].name);
-
         cc.eventManager.addListener({
             event: cc.EventListener.TOUCH_ONE_BY_ONE,
             swallowTouches: true,
@@ -55,7 +54,7 @@ var MenuMap = BaseLayer.extend({
         }
     },
 
-    createMap: function (nameSpite, pos, anchor, i, isLock = true) {
+    createMap: function (nameSpite, pos, anchor, i, isLock = false) {
         let menuMap2 = this.loadAndSetSprite(nameSpite, pos.x, pos.y, .16, false);
         menuMap2.setAnchorPoint(anchor.x, anchor.y);
         menuMap2.name = "menuMap" + i;
@@ -70,6 +69,8 @@ var MenuMap = BaseLayer.extend({
         let logMap2 = this.loadAndSetSprite("log_map.png", blurPanel.width / 2, blurPanel.height / 2, 2.6);
         blurPanel.addChild(logMap2);
         blurPanel.setVisible(isLock);
+
+        listMap.push(blurPanel);
     },
 
     buttonEvent: function (sender, type) {
@@ -94,6 +95,31 @@ var MenuMap = BaseLayer.extend({
                 const map = new Map1();
                 map.name = "Map";
                 gameScene.addChild(map);
+                console.log("list map ", listMap);
+                break;
+            }
+            case "menuMap2": {
+                if (!listMap[1].isVisible()) {
+                    const map = new Map2();
+                    map.name = "Map";
+                    gameScene.addChild(map);
+                }
+                break;
+            }
+            case "menuMap3": {
+                if (!listMap[2].isVisible()) {
+                    const map = new Map3();
+                    map.name = "Map";
+                    gameScene.addChild(map);
+                }
+                break;
+            }
+            case "menuMap4": {
+                if (!listMap[3].isVisible()) {
+                    const map = new Map4();
+                    map.name = "Map";
+                    gameScene.addChild(map);
+                }
                 break;
             }
         }
